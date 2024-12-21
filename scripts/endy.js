@@ -3,7 +3,7 @@ const fs = require("fs");
 
 module.exports = {
   config: {
-    name: "Aayushaa",
+    name: "Endy",
     version: "1.0",
     author: "AceGun",
     countDown: 5,
@@ -33,7 +33,7 @@ module.exports = {
 
         // Send the reply with the video
         return message.reply({
-          body: "Hi, I am Prōxima. Developed by Miss Aāyusha Shrestha and my Second developer is Luzzixy.🤍🌌",
+          body: "Hi, I am Endy. Developed by Dàññy Çodex💔.🤍🌌",
           attachment: response.data,
         });
       } catch (error) {
