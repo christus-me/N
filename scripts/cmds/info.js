@@ -1,66 +1,60 @@
 const fs = require('fs');
 const moment = require('moment-timezone');
-const NepaliDate = require('nepali-date');
 
 module.exports = {
-  config: {
-    name: "info",
-    version: "1.3",
-    author: "AceGun",
-    countDown: 5,
-    role: 0,
-    shortDescription: {
-      vi: "",
-      en: "Sends information about the bot and admin along with an image."
-    },
-    longDescription: {
-      vi: "",
-      en: "Sends information about the bot and admin along with an image."
-    },
-    category: "utility",
-    guide: {
-      en: "{pn}"
-    },
-    envConfig: {}
-  },
+	config: {
+		name: "info",
+		version: "1.0",
+		author: "cliff",
+		countDown: 20,
+		role: 0,
+		shortDescription: { vi: "", en: "" },
+		longDescription: { vi: "", en: "" },
+		category: "owner",
+		guide: { en: "" },
+		envConfig: {}
+	},
+	onStart: async function ({ message }) {
+		const botName = "𝗚𝗶𝗬𝘂";
+		const botPrefix = "/";
+		const authorName = "𝗚𝗮𝗯𝗬𝘂";
+		const ownAge = "14";
+		const teamName = "𝗠𝗶𝘅𝗶𝗻𝖳𝖾𝖺𝗆";
+		const authorFB = "https://www.facebook.com/61562362827346";
+		const authorInsta = "Gabyu58";
+		const tikTok = "tiktok.com/@gojoyu69";
+		const urls = JSON.parse(fs.readFileSync('Gabyu.json'));
+		const link = urls[Math.floor(Math.random() * urls.length)];
+		const now = moment().tz('Asia/Jakarta');
+		const date = now.format('MMMM Do YYYY');
+		const time = now.format('h:mm:ss A');
+		const uptime = process.uptime();
+		const seconds = Math.floor(uptime % 60);
+		const minutes = Math.floor((uptime / 60) % 60);
+		const hours = Math.floor((uptime / (60 * 60)) % 24);
+		const days = Math.floor(uptime / (60 * 60 * 24));
+		const uptimeString = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
 
-  onStart: async function ({ message }) {
-    const botName = "";
-    const botPrefix = "$";
-    const authorName = "";
-    const authorFB = "";
-    const authorInsta = "";
-    const status = "";
-
-    const urls = JSON.parse(fs.readFileSync('zoro.json'));//please provide imgur img link on zoro.json file
-    const link = urls[Math.floor(Math.random() * urls.length)];
-
-    // Get current date and time in Asia/Kathmandu timezone
-    const now = moment().tz('Asia/Kathmandu');
-    const date = now.format('MMMM Do YYYY');
-    const time = now.format('h:mm:ss A');
-
-    // Get Nepali date
-    const nepaliDate = new NepaliDate(now.toDate());
-    const bsDateStr = nepaliDate.format("dddd, DD MMMM");
-
-    // Calculate bot uptime
-    const uptime = process.uptime();
-    const seconds = Math.floor(uptime % 60);
-    const minutes = Math.floor((uptime / 60) % 60);
-    const hours = Math.floor((uptime / (60 * 60)) % 24);
-    const days = Math.floor(uptime / (60 * 60 * 24));
-    const uptimeString = `${hours}hrs: ${minutes}min: ${seconds}sec`;
-
-    message.reply({
-      body: `===「 Bot & owner Info 」===\n❏Bot Name: ${botName}\n❏Bot Prefix: ${botPrefix}\n❏AuthorName: ${authorName}\n❏FB: ${authorFB}\n❏Insta: ${authorInsta}\n❏Status: ${status}\n❏Date: ${date}\n❏BsDate:  ${bsDateStr}\n❏Time: ${time}\n❏Bot Running: ${uptimeString}\n=====================`,
-      attachment: await global.utils.getStreamFromURL(link)
-    });
-  },
-
-  onChat: async function({ event, message, getLang }) {
-    if (event.body && event.body.toLowerCase() === "info") {
-      this.onStart({ message });
-    }
-  }
+		message.reply({
+			body: `《  Bot & Owner Info 》
+\Name: ${botName}
+\Bot Prefix: ${botPrefix}
+\owner: ${authorName}
+\age : ${ownAge}
+\Facebook: ${authorFB}
+\Instagram: ${authorInsta}
+\TikTok: ${tikTok}
+\Datee: ${date}
+\Time: ${time}
+\Team: ${teamName}
+\Uptime: ${uptimeString}
+\===============`,
+			attachment: await global.utils.getStreamFromURL(link)
+		});
+	},
+	onChat: async function ({ event, message, getLang }) {
+		if (event.body && event.body.toLowerCase() === "info") {
+			this.onStart({ message });
+		}
+	}
 };
